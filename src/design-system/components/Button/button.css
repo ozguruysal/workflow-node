@@ -16,7 +16,7 @@
   font-weight: 500;
   border: 1px solid var(--btn-border-color);
   border-radius: 4px;
-  transition: background-color 0.15s ease-out;
+  transition: background-color 150ms ease-out;
   outline: none;
   cursor: pointer;
 

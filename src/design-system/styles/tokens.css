@@ -20,6 +20,8 @@
   --line-height-base: 1.5rem;
   --font-weight-base: 400;
 
+  --font-size-2xs: 0.625rem; /* 10px */
+  --font-size-xs: 0.75rem; /* 12px */
   --font-size-sm: 0.8125rem; /* 13px */
   --font-size-md: 0.9375rem; /* 15px */
 
@@ -32,6 +34,8 @@
   --background-base-hover: #efefef;
   --background-base-pressed: #e8e8e8;
   --background-base-disabled: #fafafa;
+
+  --background-surface-5: #f1f1f1;
 
   /* Borders and focus outline */
   --border-base: #d0d0d0;
@@ -53,6 +57,8 @@
   --foreground-text-base-strong: #101010;
   --foreground-text-base-muted: #777777;
   --foreground-text-base-disabled: #a6a6a6;
+
+  --foreground-text-danger: #ea1f30;
 
   /* Icons */
   --foreground-icon-base: #333333;

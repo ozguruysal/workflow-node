@@ -1,0 +1,82 @@
+.ds-menu {
+  min-width: 10rem;
+  padding: 0.25rem;
+  background-color: var(--background-base);
+  border: 1px solid var(--border-base);
+  border-radius: 8px;
+  font-size: var(--font-size-sm);
+  outline: none;
+  box-shadow:
+    rgba(0, 0, 0, 0.15) 0px 15px 25px,
+    rgba(0, 0, 0, 0.05) 0px 5px 10px;
+
+  & .react-aria-Separator {
+    margin: 0.25rem -0.25rem;
+    border: 0;
+    border-top: 0.5px solid var(--border-base-muted);
+    height: auto;
+    width: auto;
+  }
+}
+
+.ds-menu-item {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+
+  &[data-focused] {
+    background: var(--background-base-hover);
+  }
+
+  &[data-disabled] {
+    color: var(--foreground-text-base-disabled);
+  }
+
+  kbd {
+    padding: 0.25rem;
+    background: var(--background-surface-5);
+    color: var(--foreground-text-base-muted);
+    font-size: var(--font-size-xs);
+    line-height: 1;
+    border: 1px solid var(--border-base-muted);
+    border-radius: 4px;
+  }
+
+  &.ds-menu-item-danger {
+    color: var(--foreground-text-danger);
+  }
+}
+
+/* Popover can be moved to its own component along with these styles */
+.ds-popover {
+  transition:
+    transform 200ms,
+    opacity 200ms;
+
+  &[data-entering],
+  &[data-exiting] {
+    transform: var(--origin);
+    opacity: 0;
+  }
+
+  &[data-placement="top"] {
+    --origin: translateY(8px);
+  }
+
+  &[data-placement="bottom"] {
+    --origin: translateY(-8px);
+  }
+
+  &[data-placement="left"] {
+    --origin: translateX(8px);
+  }
+
+  &[data-placement="right"] {
+    --origin: translateX(-8px);
+  }
+}
