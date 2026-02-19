@@ -1,8 +1,5 @@
 import { clsx } from "clsx";
-import {
-  Button as ReactAriaButton,
-  composeRenderProps,
-} from "react-aria-components";
+import { Button as ReactAriaButton } from "react-aria-components";
 
 import type { ButtonProps as ReactAriaButtonProps } from "react-aria-components";
 
@@ -11,15 +8,29 @@ import "./button.css";
 export type ButtonProps = ReactAriaButtonProps & {
   size?: "sm" | "md" | "lg";
   variant?: "outline" | "ghost";
-  isIconOnly?: boolean;
-};
+  iconBefore?: React.ReactElement;
+  iconOnly?: boolean;
+  children?: React.ReactNode;
+} & ( // This is to make sure iconBefore and aria-label are required when iconOnly is true
+    | {
+        iconBefore?: React.ReactElement;
+        iconOnly?: false;
+      }
+    | {
+        iconOnly?: true;
+        iconBefore: React.ReactElement;
+        "aria-label": string;
+      }
+  );
 
 export const Button = (props: ButtonProps) => {
   const {
     size = "md",
     variant = "outline",
-    isIconOnly = false,
+    iconBefore,
+    iconOnly = false,
     className,
+    children,
   } = props;
 
   return (
@@ -29,11 +40,13 @@ export const Button = (props: ButtonProps) => {
         "ds-btn",
         `ds-btn-${size}`,
         `ds-btn-${variant}`,
-        isIconOnly && "ds-btn-icon-only",
+        iconOnly && "ds-btn-icon-only",
         className,
       )}
     >
-      {composeRenderProps(props.children, (children) => children)}
+      {iconBefore && <span className="ds-btn-icon">{iconBefore}</span>}
+
+      {!iconOnly && <span>{children}</span>}
     </ReactAriaButton>
   );
 };

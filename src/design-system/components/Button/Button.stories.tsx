@@ -1,3 +1,4 @@
+import { DeleteIcon } from "../../icons";
 import { Button } from "./Button";
 
 import type { Meta, StoryObj } from "@storybook/react-vite";
@@ -63,6 +64,67 @@ export const Sizes: Story = {
       <Button size="lg" variant="ghost">
         Large Ghost
       </Button>
+    </>
+  ),
+};
+
+export const IconOnly: Story = {
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+        }}
+      >
+        {Story()}
+      </div>
+    ),
+  ],
+  render: () => (
+    <>
+      <Button
+        iconOnly
+        size="sm"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
+
+      <Button
+        iconOnly
+        size="md"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
+      <Button
+        iconOnly
+        size="lg"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
+      <Button
+        iconOnly
+        size="sm"
+        variant="ghost"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
+
+      <Button
+        iconOnly
+        size="md"
+        variant="ghost"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
+      <Button
+        iconOnly
+        size="lg"
+        variant="ghost"
+        iconBefore={<DeleteIcon />}
+        aria-label="Delete"
+      />
     </>
   ),
 };

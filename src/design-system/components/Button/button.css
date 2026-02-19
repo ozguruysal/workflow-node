@@ -3,6 +3,7 @@
   --btn-padding-x: 0.75rem;
   --btn-font-size: var(--font-size-sm);
   --btn-border-color: var(--border-base);
+  --btn-icon-size: 1rem;
 
   height: var(--btn-size);
   padding-inline: var(--btn-padding-x);
@@ -44,9 +45,20 @@
 .ds-btn-sm {
   --btn-size: 1.5rem;
   --btn-padding-x: 0.5rem;
+  --btn-icon-size: 0.875rem;
 }
 
 .ds-btn-lg {
   --btn-size: 2.5rem;
   --btn-padding-x: 1.25rem;
+}
+
+.ds-btn-icon-only {
+  --btn-padding-x: 0;
+  width: var(--btn-size);
+}
+
+.ds-btn-icon {
+  width: var(--btn-icon-size);
+  height: var(--btn-icon-size);
 }
