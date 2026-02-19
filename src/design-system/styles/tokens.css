@@ -1,0 +1,84 @@
+/* 
+  Design System Tokens
+
+  These are the core design tokens for the design system, including colors, typography, spacing, etc.
+  They are defined as CSS custom properties (variables) and can be used throughout the application.
+ 
+  These tokens should normally be derived from core tokens defined in another file. 
+ 
+  For example:
+    --border-info: var(--blue-600);
+ 
+  ONLY A SMALL SET OF TOKENS ARE DEFINED HERE FOR BREVITY.
+*/
+
+:root {
+  --default-font-family:
+    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --line-height-base: 1.5rem;
+  --font-weight-base: 400;
+
+  --font-size-sm: 0.8125rem; /* 13px */
+  --font-size-md: 0.9375rem; /* 15px */
+
+  /****************************
+   - COLORS
+  ****************************/
+
+  /* Background */
+  --background-base: #ffffff;
+  --background-base-hover: #efefef;
+  --background-base-pressed: #e8e8e8;
+  --background-base-disabled: #fafafa;
+
+  /* Borders and focus outline */
+  --border-base: #d0d0d0;
+  --border-base-muted: #e4e4e4;
+  --border-base-hover: #b2b2b2;
+  --border-base-strong: #b2b2b2;
+  --border-base-disabled: #e6e6e6;
+  --border-base-selected: #161616;
+
+  --border-info: #5a4cc2;
+  --border-success: #29a360;
+  --border-warning: #d28f13;
+  --border-danger: #ea1f30;
+
+  --focus-ring: #5a4cc2;
+
+  /* Text */
+  --foreground-text-base: #333333;
+  --foreground-text-base-strong: #101010;
+  --foreground-text-base-muted: #777777;
+  --foreground-text-base-disabled: #a6a6a6;
+
+  /* Icons */
+  --foreground-icon-base: #333333;
+  --foreground-icon-base-strong: #101010;
+}
+
+/* @media (prefers-color-scheme: dark) {
+  :root {
+    --background-base: #121212;
+    --background-base-hover: #1a1a1a;
+    --background-base-pressed: #222222;
+    --background-base-disabled: #1a1a1a;
+
+    --border-base: #2a2a2a;
+    --border-base-muted: #333333;
+    --border-base-hover: #444444;
+    --border-base-strong: #555555;
+    --border-base-disabled: #2a2a2a;
+    --border-base-selected: #ffffff;
+
+    --foreground-text-base: #e6e6e6;
+    --foreground-text-base-strong: #ffffff;
+    --foreground-text-base-muted: #a6a6a6;
+    --foreground-text-base-disabled: #666666;
+
+    --foreground-icon-base: #e6e6e6;
+    --foreground-icon-base-strong: #ffffff;
+  }
+} */
