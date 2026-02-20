@@ -66,6 +66,10 @@
   /* Icons */
   --foreground-icon-base: #333333;
   --foreground-icon-base-strong: #101010;
+  --foreground-icon-info: #5a4cc2;
+  --foreground-icon-success: #29a360;
+  --foreground-icon-warning: #d28f13;
+  --foreground-icon-danger: #ea1f30;
 }
 
 /* @media (prefers-color-scheme: dark) {

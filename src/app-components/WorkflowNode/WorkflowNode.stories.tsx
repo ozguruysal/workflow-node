@@ -15,12 +15,65 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Overview: Story = {
-  render: () => (
-    <WorkflowNode
-      status="default"
-      title="Send Message"
-      description="post:message"
-      icon={<SlackLogo />}
-    />
-  ),
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "default",
+  },
+};
+
+export const StatusSuccess: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "success",
+  },
+};
+
+export const StatusWarning: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "warning",
+  },
+};
+
+export const StatusError: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "error",
+  },
+};
+
+export const StatusInactive: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "inactive",
+  },
+};
+
+export const StatusPending: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "pending",
+  },
+};
+
+export const Pinned: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "default",
+    isPinned: true,
+  },
 };

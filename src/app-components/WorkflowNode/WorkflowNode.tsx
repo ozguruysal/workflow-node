@@ -19,6 +19,13 @@ import clsx from "clsx";
 
 import "./workflow-node.css";
 import React from "react";
+import {
+  CheckboxCircleIcon,
+  CloseCircleIcon,
+  PinIcon,
+  ProhibitedIcon,
+  WarningIcon,
+} from "../../design-system/icons";
 
 type NodeStatus =
   | "default"
@@ -32,7 +39,7 @@ export type WorkflowNodeProps = {
   title: string;
   description?: string;
   icon?: React.ReactElement;
-  tooltip?: React.ReactElement;
+  tooltip?: React.ReactElement; // Todo
   status: NodeStatus;
   isPinned?: boolean;
   isActive?: boolean;
@@ -44,32 +51,69 @@ export const WorkflowNode = (props: WorkflowNodeProps) => {
     title,
     description,
     icon,
-    // tooltip,
-    // status,
-    // isPinned,
+    status,
+    isPinned = false,
     className,
     isActive = true,
   } = props;
 
   return (
-    <Group className="workflow-node" tabIndex={0}>
+    <Group
+      className={clsx("workflow-node", status, isPinned && "pinned", className)}
+      tabIndex={0}
+    >
+      <WorkflowNodeStatusIcon status={status} isPinned={isPinned} />
+
       <WorkflowNodeToolbar isActive={isActive} />
 
-      <div className={clsx("workflow-node-group", className)}>
-        <div className="workflow-node-content">
-          {icon && <div className="workflow-node-icon">{icon}</div>}
+      <div className={clsx("workflow-node-card", className)}>
+        {icon && <div className="workflow-node-icon">{icon}</div>}
 
-          <div className="workflow-node-text">
-            <div className="workflow-node-title">{title}</div>
-            {description && (
-              <div className="workflow-node-description">{description}</div>
-            )}
-          </div>
+        <div className="workflow-node-text">
+          <div className="workflow-node-title">{title}</div>
+          {description && (
+            <div className="workflow-node-description">{description}</div>
+          )}
         </div>
       </div>
     </Group>
   );
 };
+
+type WorkflowNodeStatusIconProps = {
+  status: NodeStatus;
+  isPinned: boolean;
+};
+
+function WorkflowNodeStatusIcon(props: WorkflowNodeStatusIconProps) {
+  const { status, isPinned } = props;
+
+  let statusIcon = null;
+
+  if (isPinned) {
+    statusIcon = <PinIcon />;
+  }
+
+  switch (status) {
+    case "warning":
+      statusIcon = <WarningIcon />;
+      break;
+    case "success":
+      statusIcon = <CheckboxCircleIcon />;
+      break;
+    case "error":
+      statusIcon = <CloseCircleIcon />;
+      break;
+    case "inactive":
+      statusIcon = <ProhibitedIcon />;
+      break;
+    case "pending":
+      statusIcon = null;
+      break;
+  }
+
+  return <div className="workflow-node-status-icon">{statusIcon}</div>;
+}
 
 type WorkflowNodeToolbarProps = {
   isActive: boolean;

@@ -1,25 +1,75 @@
 .workflow-node {
+  --icon-color: var(---foreground-icon-warning);
+  --border-color: var(--border-base);
+
   position: relative;
-  width: 12.5rem;
-  padding: 1rem;
-  background-color: var(--background-base);
-  border: 1px solid var(--border-base);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: border-color 150ms ease-out;
 
-  &[data-hovered] {
-    border-color: var(--border-base-hover);
+  &:focus {
+    outline: none;
+  }
 
-    & .workflow-node-toolbar {
+  &[data-focus-within] {
+    .workflow-node-toolbar {
       opacity: 1;
     }
   }
 
-  &[data-focus-within] {
-    & .workflow-node-toolbar {
+  &[data-hovered] {
+    .workflow-node-toolbar {
       opacity: 1;
     }
+  }
+
+  &[data-hovered].default {
+    .workflow-node-card {
+      border-color: var(--border-base-hover);
+    }
+  }
+}
+
+.workflow-node.inactive {
+  --icon-color: var(--foreground-icon-base-strong);
+
+  .workflow-node-card {
+    background-color: var(--background-base-disabled);
+
+    svg {
+      filter: grayscale(100%) opacity(50%);
+    }
+  }
+}
+
+.workflow-node.success {
+  --icon-color: var(--foreground-icon-success);
+  --border-color: var(--border-success);
+}
+
+.workflow-node.warning {
+  --icon-color: var(--foreground-icon-warning);
+  --border-color: var(--border-warning);
+}
+
+.workflow-node.error {
+  --icon-color: var(--foreground-icon-danger);
+  --border-color: var(--border-danger);
+}
+
+.workflow-node.pinned {
+  --icon-color: var(--foreground-icon-base-strong);
+  --border-color: var(--border-base-selected);
+}
+
+.workflow-node-status-icon {
+  padding: 0.125rem;
+  background-color: var(--background-base);
+  color: var(--icon-color);
+  position: absolute;
+  left: -0.75rem;
+  top: -0.75rem;
+
+  & > svg {
+    width: 1.25rem;
+    height: 1.25rem;
   }
 }
 
@@ -27,37 +77,51 @@
   position: absolute;
   right: 0;
   top: -2rem;
-  height: 1.625rem;
   border: 1px solid var(--border-base-muted);
+  border-radius: 6px;
   opacity: 0;
+  overflow: hidden;
+  transition: opacity 150ms ease-out;
 
   &:has(.workflow-node-menu-trigger[aria-expanded="true"]) {
     opacity: 1;
   }
 
-  & > * {
+  & > button {
+    width: 1.4375rem;
+    height: 1.4375rem;
     border-right: 1px solid var(--border-base-muted);
     border-radius: 0;
+
+    &[data-focus-visible] {
+      outline: 1px solid var(--focus-ring);
+      outline-offset: -0.125rem;
+      border-radius: 4px;
+    }
   }
 
-  & > *:last-child {
+  & > button:last-child {
     border-right: none;
   }
 }
 
-.workflow-node-content {
+.workflow-node-card {
+  width: 12.5rem;
+  padding: 1rem;
   display: flex;
   align-items: center;
   gap: 0.625rem;
+  background-color: var(--background-base);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 150ms ease-out;
 }
 
 .workflow-node-icon {
   width: 2rem;
   height: 2rem;
   flex-shrink: 0;
-}
-
-.workflow-node-text {
 }
 
 .workflow-node-title {
