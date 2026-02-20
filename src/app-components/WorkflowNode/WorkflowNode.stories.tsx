@@ -6,6 +6,13 @@ import { SlackLogo } from "../workflow-icons/SlackLogo";
 const meta = {
   title: "App Components/WorkflowNode",
   component: WorkflowNode,
+  argTypes: {
+    icon: {
+      control: {
+        disable: true,
+      },
+    },
+  },
   parameters: {
     layout: "centered",
   },

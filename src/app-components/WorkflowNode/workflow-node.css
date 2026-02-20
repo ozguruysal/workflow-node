@@ -14,7 +14,7 @@
     }
   }
 
-  &[data-hovered].default {
+  &[data-hovered].default:not(.pinned) {
     .workflow-node-card {
       border-color: var(--border-base-hover);
     }
