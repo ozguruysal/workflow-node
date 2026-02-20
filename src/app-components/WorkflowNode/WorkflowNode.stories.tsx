@@ -30,6 +30,16 @@ export const Overview: Story = {
   },
 };
 
+export const Selected: Story = {
+  args: {
+    title: "Send Message",
+    description: "post:message",
+    icon: <SlackLogo />,
+    status: "default",
+    isSelected: true,
+  },
+};
+
 export const StatusSuccess: Story = {
   args: {
     title: "Send Message",

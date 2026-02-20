@@ -44,6 +44,7 @@ export type WorkflowNodeProps = {
   status: NodeStatus;
   isPinned?: boolean;
   isActive?: boolean;
+  isSelected?: boolean;
   className?: string;
 };
 
@@ -54,13 +55,20 @@ export const WorkflowNode = (props: WorkflowNodeProps) => {
     icon,
     status,
     isPinned = false,
-    className,
+    isSelected = false,
     isActive = true,
+    className,
   } = props;
 
   return (
     <Group
-      className={clsx("workflow-node", status, isPinned && "pinned", className)}
+      className={clsx(
+        "workflow-node",
+        status,
+        isPinned && "pinned",
+        isSelected && "selected",
+        className,
+      )}
       tabIndex={0}
     >
       <WorkflowNodeStatusIcon status={status} isPinned={isPinned} />
@@ -159,7 +167,7 @@ function WorkflowNodeToolbar(props: WorkflowNodeToolbarProps) {
             </MenuItem>
 
             <MenuItem>
-              <Text>Execute step"</Text>
+              <Text>Execute step</Text>
             </MenuItem>
 
             <MenuItem>

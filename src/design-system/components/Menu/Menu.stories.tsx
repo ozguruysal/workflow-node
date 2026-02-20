@@ -31,7 +31,7 @@ export const Overview: Story = {
           </MenuItem>
 
           <MenuItem>
-            <Text>Execute step"</Text>
+            <Text>Execute step</Text>
           </MenuItem>
 
           <MenuItem>

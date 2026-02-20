@@ -133,6 +133,11 @@
   transition: border-color 150ms ease-out;
 }
 
+.selected .workflow-node-card {
+  outline: 3px solid var(--border-info-muted);
+  outline-offset: 1px;
+}
+
 .workflow-node-icon {
   width: 2rem;
   height: 2rem;
