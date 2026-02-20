@@ -26,6 +26,7 @@ import {
   ProhibitedIcon,
   WarningIcon,
 } from "../../design-system/icons";
+import { Spinner } from "../../design-system/components/Spinner/Spinner";
 
 type NodeStatus =
   | "default"
@@ -108,7 +109,7 @@ function WorkflowNodeStatusIcon(props: WorkflowNodeStatusIconProps) {
       statusIcon = <ProhibitedIcon />;
       break;
     case "pending":
-      statusIcon = null;
+      statusIcon = <Spinner />;
       break;
   }
 

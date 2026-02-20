@@ -73,25 +73,6 @@
 }
 
 /* @media (prefers-color-scheme: dark) {
-  :root {
-    --background-base: #121212;
-    --background-base-hover: #1a1a1a;
-    --background-base-pressed: #222222;
-    --background-base-disabled: #1a1a1a;
-
-    --border-base: #2a2a2a;
-    --border-base-muted: #333333;
-    --border-base-hover: #444444;
-    --border-base-strong: #555555;
-    --border-base-disabled: #2a2a2a;
-    --border-base-selected: #ffffff;
-
-    --foreground-text-base: #e6e6e6;
-    --foreground-text-base-strong: #ffffff;
-    --foreground-text-base-muted: #a6a6a6;
-    --foreground-text-base-disabled: #666666;
-
-    --foreground-icon-base: #e6e6e6;
-    --foreground-icon-base-strong: #ffffff;
-  }
+  :// Dark theme overrides would go here, e.g.:
+  --background-base: #1a1a1a;
 } */

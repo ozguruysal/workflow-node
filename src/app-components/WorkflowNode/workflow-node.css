@@ -65,6 +65,15 @@
   --border-color: var(--border-base-selected);
 }
 
+.workflow-node.pending {
+  pointer-events: none;
+  cursor: default;
+
+  .workflow-node-card > * {
+    opacity: 0.4;
+  }
+}
+
 .workflow-node-status-icon {
   padding: 0.125rem;
   background-color: var(--background-base);
