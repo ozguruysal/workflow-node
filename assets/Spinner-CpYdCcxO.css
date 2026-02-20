@@ -1,0 +1,1 @@
+.ds-spinner{color:var(--foreground-icon-info);animation:rotation 1s linear infinite}@keyframes rotation{0%{transform:rotate(0)}to{transform:rotate(360deg)}}
