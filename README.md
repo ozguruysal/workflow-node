@@ -2,6 +2,12 @@
 
 A modern, accessible node component for workflow automation interfaces. Built as a design system prototype that expands on the current n8n node design which aims to improve visual clarity, accessibility, and composition patterns.
 
+**[View the live deployment →](https://ozguruysal.github.io/workflow-node/)**
+
+## Design Files
+
+🎨 **[Workflow Node Component.fig](./Workflow%20Node%20Component.fig)** - Visual guide for development and proof of concept for the reusable component. Not a polished design asset, but rather a reference for implementation.
+
 ## Quick Start
 
 ```bash
@@ -10,12 +16,6 @@ pnpm install
 
 # Start Storybook (view components in isolation)
 pnpm storybook
-
-# Build for production
-pnpm build
-
-# Run dev server
-pnpm dev
 ```
 
 Storybook runs on `http://localhost:6006` and includes interactive stories for all components.
