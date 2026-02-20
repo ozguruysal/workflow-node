@@ -8,12 +8,6 @@
     outline: none;
   }
 
-  &[data-focus-within] {
-    .workflow-node-toolbar {
-      opacity: 1;
-    }
-  }
-
   &[data-hovered] {
     .workflow-node-toolbar {
       opacity: 1;
@@ -24,6 +18,18 @@
     .workflow-node-card {
       border-color: var(--border-base-hover);
     }
+  }
+
+  /* This invisible box to avoid toolbar flicker when mouse pointer is between the node and the toolbar  */
+  &::before {
+    content: "";
+    position: absolute;
+    right: 0;
+    top: -6px;
+    width: 4.7rem;
+    height: 6px;
+    border-radius: 6px;
+    background-color: transparent;
   }
 }
 
