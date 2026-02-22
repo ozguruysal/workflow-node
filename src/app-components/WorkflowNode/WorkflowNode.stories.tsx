@@ -36,7 +36,6 @@ export const Selected: Story = {
     description: "post:message",
     icon: <SlackLogo />,
     status: "default",
-    isSelected: true,
   },
 };
 
