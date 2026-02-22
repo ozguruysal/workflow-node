@@ -1,9 +1,10 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-
-import { Menu, MenuItem, MenuSection, MenuTrigger } from "./Menu";
-import { Button } from "../Button";
-import { MoreIcon } from "../../icons/MoreIcon";
 import { Keyboard, Separator, Text } from "react-aria-components";
+
+import { MoreIcon } from "../../icons/MoreIcon";
+import { Button } from "../Button";
+import { Menu, MenuItem, MenuSection, MenuTrigger } from "./Menu";
+
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {
   title: "Components/Menu",

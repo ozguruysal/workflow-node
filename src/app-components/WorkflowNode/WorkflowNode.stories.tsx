@@ -1,7 +1,7 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
-
-import { WorkflowNode } from "./WorkflowNode";
 import { SlackLogo } from "../workflow-icons/SlackLogo";
+import { WorkflowNode } from "./WorkflowNode";
+
+import type { Meta, StoryObj } from "@storybook/react-vite";
 
 const meta = {
   title: "App Components/WorkflowNode",
