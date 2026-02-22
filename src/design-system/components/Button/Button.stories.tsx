@@ -127,3 +127,30 @@ export const IconOnly: Story = {
     </>
   ),
 };
+
+export const Disabled: Story = {
+  decorators: [
+    (Story) => (
+      <div
+        style={{
+          display: "flex",
+          alignItems: "center",
+          gap: "0.75rem",
+        }}
+      >
+        {Story()}
+      </div>
+    ),
+  ],
+  render: () => (
+    <>
+      <Button isDisabled>Disabled</Button>
+      <Button isDisabled variant="outline">
+        Disabled
+      </Button>
+      <Button isDisabled variant="ghost">
+        Disabled
+      </Button>
+    </>
+  ),
+};

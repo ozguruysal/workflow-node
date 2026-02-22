@@ -34,7 +34,9 @@
   }
 
   &[data-disabled] {
+    color: var(--foreground-text-base-disabled);
     background-color: var(--background-base-disabled);
+    cursor: default;
   }
 }
 
