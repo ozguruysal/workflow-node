@@ -1,3 +1,6 @@
+import clsx from "clsx";
+import React from "react";
+
 import { SlackLogo } from "../workflow-icons/SlackLogo";
 import { WorkflowNode } from "./WorkflowNode";
 
@@ -16,10 +19,74 @@ const meta = {
   parameters: {
     layout: "centered",
   },
+  decorators: [
+    (Story, { parameters }) => (
+      <NodeShell defaultSelected={parameters.nodeShellDefaultSelected}>
+        <Story />
+      </NodeShell>
+    ),
+  ],
 } satisfies Meta<typeof WorkflowNode>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
+
+// A simple wrapper to simulate selection state in Storybook
+function NodeShell({
+  children,
+  defaultSelected = false,
+}: {
+  children: React.ReactNode;
+  defaultSelected?: boolean;
+}) {
+  const [selected, setSelected] = React.useState(defaultSelected);
+  const wrapperRef = React.useRef<HTMLDivElement>(null);
+
+  React.useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(event.target as Node)
+      ) {
+        setSelected(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setSelected(true);
+    }
+
+    if (e.key === "Escape") {
+      setSelected(false);
+    }
+  };
+
+  return (
+    <div
+      ref={wrapperRef}
+      role="group"
+      tabIndex={0}
+      aria-selected={selected}
+      className={clsx("react-flow__node", selected && "selected")}
+      onClick={(e) => {
+        e.stopPropagation();
+        setSelected(true);
+      }}
+      onKeyDown={handleKeyDown}
+      style={{
+        outline: "none",
+      }}
+    >
+      {children}
+    </div>
+  );
+}
 
 export const Overview: Story = {
   args: {
@@ -36,6 +103,9 @@ export const Selected: Story = {
     description: "post:message",
     icon: <SlackLogo />,
     status: "default",
+  },
+  parameters: {
+    nodeShellDefaultSelected: true,
   },
 };
 
