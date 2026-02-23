@@ -110,8 +110,11 @@
   transition: opacity 150ms ease-out;
   opacity: 0;
 
-  &:focus-within,
   &:has(.workflow-node-menu-trigger[aria-expanded="true"]) {
+    opacity: 1;
+  }
+
+  &:has(.ds-btn[data-focus-visible]) {
     opacity: 1;
   }
 }
