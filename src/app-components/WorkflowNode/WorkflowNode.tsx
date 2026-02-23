@@ -65,13 +65,15 @@ export const WorkflowNode = (props: WorkflowNodeProps) => {
     className,
   } = props;
 
+  const isDisabled = status === "pending";
+
   return (
     <Group
       className={clsx("workflow-node", status, isPinned && "pinned", className)}
     >
       <WorkflowNodeStatusIcon status={status} isPinned={isPinned} aria-hidden />
 
-      <WorkflowNodeToolbar isActive={isActive} />
+      <WorkflowNodeToolbar isActive={isActive} isDisabled={isDisabled} />
 
       <div className={clsx("workflow-node-card", className)}>
         {icon && (
@@ -128,11 +130,12 @@ function WorkflowNodeStatusIcon(props: WorkflowNodeStatusIconProps) {
 
 type WorkflowNodeToolbarProps = {
   isActive: boolean;
+  isDisabled?: boolean;
   className?: string;
 };
 
 function WorkflowNodeToolbar(props: WorkflowNodeToolbarProps) {
-  const { isActive, className } = props;
+  const { isActive, isDisabled, className } = props;
 
   return (
     <Toolbar
@@ -144,12 +147,14 @@ function WorkflowNodeToolbar(props: WorkflowNodeToolbarProps) {
           size="sm"
           iconOnly
           iconBefore={<PlayIcon />}
+          isDisabled={isDisabled}
           aria-label="Run node"
         />
         <Button
           size="sm"
           iconOnly
           iconBefore={<PowerIcon />}
+          isDisabled={isDisabled}
           aria-label={isActive ? "Deactivate node" : "Activate node"}
         />
 
@@ -159,6 +164,7 @@ function WorkflowNodeToolbar(props: WorkflowNodeToolbarProps) {
             size="sm"
             iconOnly
             iconBefore={<MoreIcon />}
+            isDisabled={isDisabled}
             aria-label="More options"
           />
 

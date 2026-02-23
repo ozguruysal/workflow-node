@@ -21,7 +21,10 @@ const meta = {
   },
   decorators: [
     (Story, { parameters }) => (
-      <NodeShell defaultSelected={parameters.nodeShellDefaultSelected}>
+      <NodeShell
+        defaultSelected={parameters.nodeShellDefaultSelected}
+        isDisabled={parameters.nodeShellIsDisabled}
+      >
         <Story />
       </NodeShell>
     ),
@@ -35,9 +38,11 @@ type Story = StoryObj<typeof meta>;
 function NodeShell({
   children,
   defaultSelected = false,
+  isDisabled = false,
 }: {
   children: React.ReactNode;
   defaultSelected?: boolean;
+  isDisabled?: boolean;
 }) {
   const [selected, setSelected] = React.useState(defaultSelected);
   const wrapperRef = React.useRef<HTMLDivElement>(null);
@@ -56,7 +61,17 @@ function NodeShell({
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const handleSelect = () => {
+    if (!isDisabled) {
+      setSelected(true);
+    }
+  };
+
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (isDisabled) {
+      return;
+    }
+
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setSelected(true);
@@ -71,12 +86,16 @@ function NodeShell({
     <div
       ref={wrapperRef}
       role="group"
-      tabIndex={0}
+      tabIndex={isDisabled ? -1 : 0}
       aria-selected={selected}
-      className={clsx("react-flow__node", selected && "selected")}
+      className={clsx(
+        "react-flow__node",
+        selected && "selected",
+        isDisabled && "disabled",
+      )}
       onClick={(e) => {
         e.stopPropagation();
-        setSelected(true);
+        handleSelect();
       }}
       onKeyDown={handleKeyDown}
       style={{
@@ -146,6 +165,9 @@ export const StatusInactive: Story = {
 };
 
 export const StatusPending: Story = {
+  parameters: {
+    nodeShellIsDisabled: true,
+  },
   args: {
     title: "Send Message",
     description: "post:message",
