@@ -12,7 +12,7 @@
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook": "storybook build && gh-pages -d storybook-static"
+    "deploy-all": "npm run build && npm run build-storybook && mkdir -p dist/storybook && cp -r storybook-static/* dist/storybook/ && gh-pages -d dist"
   },
   "dependencies": {
     "@xyflow/react": "^12.10.1",
