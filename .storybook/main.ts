@@ -7,7 +7,7 @@ const config: StorybookConfig = {
   viteFinal(config) {
     return {
       ...config,
-      base: "/storybook/",
+      base: "/workflow-node/storybook/",
     };
   },
 };
