@@ -1,18 +1,18 @@
 import clsx from "clsx";
 import React from "react";
 import {
+  Popover,
   Menu as ReactAriaMenu,
-  MenuTrigger as ReactAriaMenuTrigger,
   MenuItem as ReactAriaMenuItem,
   MenuSection as ReactAriaMenuSection,
-  Popover,
+  MenuTrigger as ReactAriaMenuTrigger,
 } from "react-aria-components";
 
 import type {
-  MenuProps as ReactAriaMenuProps,
-  MenuTriggerProps as ReactAriaMenuTriggerProps,
   MenuItemProps as ReactAriaMenuItemProps,
+  MenuProps as ReactAriaMenuProps,
   MenuSectionProps as ReactAriaMenuSectionProps,
+  MenuTriggerProps as ReactAriaMenuTriggerProps,
 } from "react-aria-components";
 
 import "./menu.css";

@@ -1,6 +1,10 @@
 .workflow-node {
-  --icon-color: var(---foreground-icon-warning);
+  --icon-color: var(--foreground-icon-warning);
   --border-color: var(--border-base);
+  --page-background-color: var(
+    --canvas-background-color,
+    var(--background-base)
+  );
 
   position: relative;
 
@@ -31,52 +35,51 @@
     border-radius: 6px;
     background-color: transparent;
   }
-}
 
-.workflow-node.inactive {
-  --icon-color: var(--foreground-icon-base-strong);
+  &.inactive {
+    --icon-color: var(--foreground-icon-base-strong);
 
-  .workflow-node-card {
-    background-color: var(--background-base-disabled);
+    .workflow-node-card {
+      background-color: var(--background-base-disabled);
 
-    svg {
-      filter: grayscale(100%) opacity(50%);
+      svg {
+        filter: grayscale(100%) opacity(50%);
+      }
     }
   }
-}
 
-.workflow-node.success {
-  --icon-color: var(--foreground-icon-success);
-  --border-color: var(--border-success);
-}
+  &.success {
+    --icon-color: var(--foreground-icon-success);
+    --border-color: var(--border-success);
+  }
 
-.workflow-node.warning {
-  --icon-color: var(--foreground-icon-warning);
-  --border-color: var(--border-warning);
-}
+  &.warning {
+    --icon-color: var(--foreground-icon-warning);
+    --border-color: var(--border-warning);
+  }
 
-.workflow-node.error {
-  --icon-color: var(--foreground-icon-danger);
-  --border-color: var(--border-danger);
-}
+  &.error {
+    --icon-color: var(--foreground-icon-danger);
+    --border-color: var(--border-danger);
+  }
 
-.workflow-node.pinned {
-  --icon-color: var(--foreground-icon-base-strong);
-  --border-color: var(--border-base-selected);
-}
+  &.pinned {
+    --icon-color: var(--foreground-icon-base-strong);
+    --border-color: var(--border-base-selected);
+  }
 
-.workflow-node.pending {
-  pointer-events: none;
-  cursor: default;
+  &.pending {
+    pointer-events: none;
+    cursor: default;
 
-  .workflow-node-card > * {
-    opacity: 0.4;
+    .workflow-node-card > * {
+      opacity: 0.4;
+    }
   }
 }
 
 .workflow-node-status-icon {
   padding: 0.125rem;
-  background-color: var(--background-base);
   color: var(--icon-color);
   position: absolute;
   left: -0.75rem;
@@ -85,38 +88,34 @@
   & > svg {
     width: 1.25rem;
     height: 1.25rem;
+    position: relative;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    background-color: var(--page-background-color);
+    border-radius: 9999px;
   }
 }
 
 .workflow-node-toolbar {
   position: absolute;
   right: 0;
-  top: -2rem;
-  border: 1px solid var(--border-base-muted);
-  border-radius: 6px;
-  opacity: 0;
-  overflow: hidden;
+  top: -1.9375rem;
   transition: opacity 150ms ease-out;
+  opacity: 0;
 
   &:has(.workflow-node-menu-trigger[aria-expanded="true"]) {
     opacity: 1;
   }
 
-  & > button {
-    width: 1.4375rem;
-    height: 1.4375rem;
-    border-right: 1px solid var(--border-base-muted);
-    border-radius: 0;
-
-    &[data-focus-visible] {
-      outline: 1px solid var(--focus-ring);
-      outline-offset: -0.125rem;
-      border-radius: 4px;
-    }
-  }
-
-  & > button:last-child {
-    border-right: none;
+  &:has(.ds-btn[data-focus-visible]) {
+    opacity: 1;
   }
 }
 
@@ -131,11 +130,6 @@
   border-radius: 8px;
   cursor: pointer;
   transition: border-color 150ms ease-out;
-}
-
-.selected .workflow-node-card {
-  outline: 3px solid var(--border-info-muted);
-  outline-offset: 1px;
 }
 
 .workflow-node-icon {
@@ -155,4 +149,20 @@
   font-family: var(--mono-font-family);
   line-height: 1;
   color: var(--foreground-text-base-muted);
+}
+
+/* Should be adjusted based on the underlying flowgraph library node classnames */
+
+.react-flow__node {
+  &.selected,
+  &:focus-visible {
+    .workflow-node-card {
+      outline: 3px solid var(--border-info-muted);
+      outline-offset: 1px;
+    }
+
+    .workflow-node-toolbar {
+      opacity: 1;
+    }
+  }
 }

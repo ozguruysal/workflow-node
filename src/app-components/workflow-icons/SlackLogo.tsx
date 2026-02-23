@@ -8,7 +8,7 @@ export function SlackLogo(props: SVGProps<SVGSVGElement>) {
       fill="currentColor"
       {...props}
     >
-      <g clip-path="url(#a)">
+      <g clipPath="url(#a)">
         <path
           fill="#E01E5A"
           d="M6.854 20.157a3.323 3.323 0 0 1-3.326 3.326 3.323 3.323 0 0 1-3.326-3.326 3.323 3.323 0 0 1 3.326-3.326h3.326v3.326Zm1.663 0a3.323 3.323 0 0 1 3.325-3.326 3.323 3.323 0 0 1 3.326 3.326v8.315a3.323 3.323 0 0 1-3.325 3.326 3.323 3.323 0 0 1-3.326-3.326v-8.315Z"

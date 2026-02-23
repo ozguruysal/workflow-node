@@ -7,12 +7,15 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
     "preview": "vite preview",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "deploy-storybook": "storybook build && gh-pages -d storybook-static"
+    "deploy-all": "npm run build && npm run build-storybook && mkdir -p dist/storybook && cp -r storybook-static/* dist/storybook/ && gh-pages -d dist"
   },
   "dependencies": {
+    "@xyflow/react": "^12.10.1",
     "clsx": "^2.1.1",
     "react": "^19.2.0",
     "react-aria-components": "^1.15.1",
@@ -20,6 +23,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@ianvs/prettier-plugin-sort-imports": "^4.7.1",
     "@storybook/addon-a11y": "^10.2.10",
     "@storybook/addon-docs": "^10.2.10",
     "@storybook/react-vite": "^10.2.10",

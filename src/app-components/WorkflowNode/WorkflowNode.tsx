@@ -1,87 +1,91 @@
+import clsx from "clsx";
+import React from "react";
 import {
   Group,
   Keyboard,
-  MenuSection,
   Separator,
   Text,
   Toolbar,
 } from "react-aria-components";
+
 import {
   Button,
+  ButtonGroup,
   Menu,
   MenuItem,
+  MenuSection,
   MenuTrigger,
+  Spinner,
 } from "../../design-system/components";
-import { PlayIcon } from "../../design-system/icons/PlayIcon";
-import { PowerIcon } from "../../design-system/icons/PowerIcon";
-import { MoreIcon } from "../../design-system/icons/MoreIcon";
-import clsx from "clsx";
-
-import "./workflow-node.css";
-import React from "react";
 import {
   CheckboxCircleIcon,
   CloseCircleIcon,
+  MoreIcon,
   PinIcon,
+  PlayIcon,
+  PowerIcon,
   ProhibitedIcon,
   WarningIcon,
 } from "../../design-system/icons";
-import { Spinner } from "../../design-system/components/Spinner/Spinner";
 
-type NodeStatus =
+import "./workflow-node.css";
+
+export type NodeStatus =
   | "default"
+  | "success"
   | "warning"
   | "error"
   | "inactive"
-  | "pending"
-  | "success";
+  | "pending";
 
 export type WorkflowNodeProps = {
   title: string;
   description?: string;
   icon?: React.ReactElement;
   tooltip?: React.ReactElement; // Todo
-  status: NodeStatus;
+  status?: NodeStatus;
   isPinned?: boolean;
   isActive?: boolean;
-  isSelected?: boolean;
   className?: string;
 };
 
+/**
+ * A generic node component for representing a step in a workflow. It should be wrapped by a parent component provided by an interactive flowgraph library.
+ * For this example we will assume we are using <a href="https://reactflow.dev/" target="_blank">React Flow</a>, but the component is designed to be agnostic of the underlying flowgraph implementation. However
+ * the classnames should be adjusted accordingly to fit the styling needs of the chosen library.
+ */
 export const WorkflowNode = (props: WorkflowNodeProps) => {
   const {
     title,
     description,
     icon,
-    status,
+    status = "default",
     isPinned = false,
-    isSelected = false,
     isActive = true,
     className,
   } = props;
 
+  const isDisabled = status === "pending";
+
   return (
     <Group
-      className={clsx(
-        "workflow-node",
-        status,
-        isPinned && "pinned",
-        isSelected && "selected",
-        className,
-      )}
-      tabIndex={0}
+      className={clsx("workflow-node", status, isPinned && "pinned", className)}
     >
-      <WorkflowNodeStatusIcon status={status} isPinned={isPinned} />
+      <WorkflowNodeStatusIcon status={status} isPinned={isPinned} aria-hidden />
 
-      <WorkflowNodeToolbar isActive={isActive} />
+      <WorkflowNodeToolbar isActive={isActive} isDisabled={isDisabled} />
 
       <div className={clsx("workflow-node-card", className)}>
-        {icon && <div className="workflow-node-icon">{icon}</div>}
+        {icon && (
+          <div className="workflow-node-icon" aria-hidden>
+            {icon}
+          </div>
+        )}
 
         <div className="workflow-node-text">
-          <div className="workflow-node-title">{title}</div>
+          <h3 className="workflow-node-title">{title}</h3>
           {description && (
-            <div className="workflow-node-description">{description}</div>
+            <p className="workflow-node-description">{description}</p>
           )}
         </div>
       </div>
@@ -126,96 +130,102 @@ function WorkflowNodeStatusIcon(props: WorkflowNodeStatusIconProps) {
 
 type WorkflowNodeToolbarProps = {
   isActive: boolean;
+  isDisabled?: boolean;
   className?: string;
 };
 
 function WorkflowNodeToolbar(props: WorkflowNodeToolbarProps) {
-  const { isActive, className } = props;
+  const { isActive, isDisabled, className } = props;
 
   return (
-    <Toolbar className={clsx("workflow-node-toolbar", className)}>
-      <Button
-        size="sm"
-        variant="ghost"
-        iconOnly
-        iconBefore={<PlayIcon />}
-        aria-label="Run node"
-      />
-      <Button
-        size="sm"
-        variant="ghost"
-        iconOnly
-        iconBefore={<PowerIcon />}
-        aria-label={isActive ? "Deactivate node" : "Activate node"}
-      />
-
-      <MenuTrigger>
+    <Toolbar
+      className={clsx("workflow-node-toolbar", className)}
+      aria-label="Node actions"
+    >
+      <ButtonGroup>
         <Button
-          className="workflow-node-menu-trigger"
           size="sm"
-          variant="ghost"
           iconOnly
-          iconBefore={<MoreIcon />}
-          aria-label="More options"
+          iconBefore={<PlayIcon />}
+          isDisabled={isDisabled}
+          aria-label="Run node"
+        />
+        <Button
+          size="sm"
+          iconOnly
+          iconBefore={<PowerIcon />}
+          isDisabled={isDisabled}
+          aria-label={isActive ? "Deactivate node" : "Activate node"}
         />
 
-        <Menu>
-          <MenuSection>
-            <MenuItem>
-              <Text>Open...</Text>
-              <Keyboard>↵</Keyboard>
-            </MenuItem>
+        <MenuTrigger>
+          <Button
+            className="workflow-node-menu-trigger"
+            size="sm"
+            iconOnly
+            iconBefore={<MoreIcon />}
+            isDisabled={isDisabled}
+            aria-label="More options"
+          />
 
-            <MenuItem>
-              <Text>Execute step</Text>
-            </MenuItem>
+          <Menu>
+            <MenuSection>
+              <MenuItem>
+                <Text>Open...</Text>
+                <Keyboard>↵</Keyboard>
+              </MenuItem>
 
-            <MenuItem>
-              <Text>Rename</Text>
-              <Keyboard>Space</Keyboard>
-            </MenuItem>
+              <MenuItem>
+                <Text>Execute step</Text>
+              </MenuItem>
 
-            <MenuItem>
-              <Text>Replace</Text>
-              <Keyboard>R</Keyboard>
-            </MenuItem>
+              <MenuItem>
+                <Text>Rename</Text>
+                <Keyboard>Space</Keyboard>
+              </MenuItem>
 
-            <MenuItem>
-              <Text>Deactivate</Text>
-              <Keyboard>D</Keyboard>
-            </MenuItem>
+              <MenuItem>
+                <Text>Replace</Text>
+                <Keyboard>R</Keyboard>
+              </MenuItem>
 
-            <MenuItem isDisabled>
-              <Text>Pin</Text>
-              <Keyboard>P</Keyboard>
-            </MenuItem>
+              <MenuItem>
+                <Text>Deactivate</Text>
+                <Keyboard>D</Keyboard>
+              </MenuItem>
 
-            <MenuItem>
-              <Text>Copy</Text>
-              <Keyboard>⌘C</Keyboard>
-            </MenuItem>
+              <MenuItem isDisabled>
+                <Text>Pin</Text>
+                <Keyboard>P</Keyboard>
+              </MenuItem>
 
-            <MenuItem>
-              <Text>Duplicate</Text>
-              <Keyboard>⌘D</Keyboard>
-            </MenuItem>
-          </MenuSection>
+              <MenuItem>
+                <Text>Copy</Text>
+                <Keyboard>⌘C</Keyboard>
+              </MenuItem>
 
-          <Separator />
+              <MenuItem>
+                <Text>Duplicate</Text>
+                <Keyboard>⌘D</Keyboard>
+              </MenuItem>
+            </MenuSection>
 
-          <MenuSection>
-            <MenuItem>
-              <Text>Convert node to sub-workflow</Text>
-              <Keyboard>ALT+X</Keyboard>
-            </MenuItem>
+            <Separator />
 
-            <MenuItem colorVariant="danger">
-              <Text>Delete</Text>
-              <Keyboard>Del</Keyboard>
-            </MenuItem>
-          </MenuSection>
-        </Menu>
-      </MenuTrigger>
+            <MenuSection>
+              <MenuItem>
+                <Text>Convert node to sub-workflow</Text>
+                <Keyboard>ALT+X</Keyboard>
+              </MenuItem>
+
+              <MenuItem colorVariant="danger">
+                <Text>Delete</Text>
+                <Keyboard>Del</Keyboard>
+              </MenuItem>
+            </MenuSection>
+          </Menu>
+        </MenuTrigger>
+      </ButtonGroup>
     </Toolbar>
   );
 }

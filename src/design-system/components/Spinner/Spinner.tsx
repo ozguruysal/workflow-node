@@ -4,6 +4,7 @@ import { ProgressBar } from "react-aria-components";
 import type { ProgressBarProps } from "react-aria-components";
 
 import "./spinner.css";
+
 import clsx from "clsx";
 
 export type SpinnerProps = ProgressBarProps & {
