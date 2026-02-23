@@ -1,6 +1,10 @@
 .workflow-node {
-  --icon-color: var(---foreground-icon-warning);
+  --icon-color: var(--foreground-icon-warning);
   --border-color: var(--border-base);
+  --page-background-color: var(
+    --canvas-background-color,
+    var(--background-base)
+  );
 
   position: relative;
 
@@ -76,7 +80,6 @@
 
 .workflow-node-status-icon {
   padding: 0.125rem;
-  background-color: var(--background-base);
   color: var(--icon-color);
   position: absolute;
   left: -0.75rem;
@@ -85,6 +88,18 @@
   & > svg {
     width: 1.25rem;
     height: 1.25rem;
+    position: relative;
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 1rem;
+    height: 1rem;
+    right: 0.25rem;
+    bottom: 0.25rem;
+    background-color: var(--page-background-color);
+    border-radius: 9999px;
   }
 }
 

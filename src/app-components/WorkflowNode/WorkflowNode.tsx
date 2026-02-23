@@ -30,7 +30,7 @@ import {
 
 import "./workflow-node.css";
 
-type NodeStatus =
+export type NodeStatus =
   | "default"
   | "success"
   | "warning"
@@ -43,7 +43,7 @@ export type WorkflowNodeProps = {
   description?: string;
   icon?: React.ReactElement;
   tooltip?: React.ReactElement; // Todo
-  status: NodeStatus;
+  status?: NodeStatus;
   isPinned?: boolean;
   isActive?: boolean;
   className?: string;
@@ -59,7 +59,7 @@ export const WorkflowNode = (props: WorkflowNodeProps) => {
     title,
     description,
     icon,
-    status,
+    status = "default",
     isPinned = false,
     isActive = true,
     className,
