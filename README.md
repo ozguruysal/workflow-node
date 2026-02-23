@@ -6,7 +6,7 @@ A modern, accessible node component for workflow automation interfaces. Built as
 
 **[View WorkflowNode component in a React app →](https://ozguruysal.github.io/workflow-node/)**
 
-**[View Design System Storybook →](https://ozguruysal.github.io/workflow-node/)**
+**[View Design System Storybook →](https://ozguruysal.github.io/workflow-node/storybook/)**
 
 ## Design Files
 
