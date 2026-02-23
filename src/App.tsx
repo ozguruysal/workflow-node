@@ -5,8 +5,9 @@ import {
   Background,
   Controls,
   ReactFlow,
+  useReactFlow,
 } from "@xyflow/react";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 import type {
   Connection,
@@ -16,7 +17,6 @@ import type {
   NodeChange,
 } from "@xyflow/react";
 
-import "./App.css";
 import "@xyflow/react/dist/style.css";
 
 import { SlackLogo } from "./app-components/workflow-icons/SlackLogo";
@@ -57,6 +57,30 @@ const initialNodes: AppNode[] = [
 ];
 const initialEdges = [{ id: "n1-n2", source: "n1", target: "n2" }];
 
+function FlowContent() {
+  const { setViewport, getNode } = useReactFlow();
+
+  useEffect(() => {
+    // Get the container dimensions
+    const container = document.querySelector(".react-flow");
+    if (container && getNode("n1")) {
+      const { offsetWidth, offsetHeight } = container as HTMLElement;
+
+      // Position to center nodes in viewport
+      const centerX = offsetWidth / 2 - 125; // 125 is midpoint between nodes
+      const centerY = offsetHeight / 2;
+
+      setViewport({
+        x: centerX,
+        y: centerY,
+        zoom: 1,
+      });
+    }
+  }, [setViewport, getNode]);
+
+  return null;
+}
+
 function App() {
   const [nodes, setNodes] = useState<Node[]>(initialNodes);
   const [edges, setEdges] = useState<Edge[]>(initialEdges);
@@ -84,11 +108,10 @@ function App() {
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
         onConnect={onConnect}
-        fitView
-        fitViewOptions={{ minZoom: 1, maxZoom: 1 }}
       >
         <Background />
         <Controls />
+        <FlowContent />
       </ReactFlow>
     </div>
   );

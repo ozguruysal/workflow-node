@@ -1,0 +1,20 @@
+@import "./design-system/styles/main.css";
+:root {
+  --canvas-background-color: #e8e8e8;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+.react-flow__background {
+  --xy-background-color-default: var(--canvas-background-color);
+}
+
+.workflow-node {
+  --page-background-color: var(--canvas-background-color);
+}
