@@ -2,7 +2,11 @@
 
 A modern, accessible node component for workflow automation interfaces. Built as a design system prototype that expands on the current n8n node design which aims to improve visual clarity, accessibility, and composition patterns.
 
-**[View the live deployment →](https://ozguruysal.github.io/workflow-node/)**
+## Live Deployment
+
+**[View WorkflowNode component in a React app →](https://ozguruysal.github.io/workflow-node/)**
+
+**[View Design System Storybook →](https://ozguruysal.github.io/workflow-node/)**
 
 ## Design Files
 
