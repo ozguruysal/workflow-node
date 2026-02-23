@@ -3,7 +3,6 @@ import React from "react";
 import {
   Group,
   Keyboard,
-  MenuSection,
   Separator,
   Text,
   Toolbar,
@@ -11,25 +10,25 @@ import {
 
 import {
   Button,
+  ButtonGroup,
   Menu,
   MenuItem,
+  MenuSection,
   MenuTrigger,
+  Spinner,
 } from "../../design-system/components";
-import { Spinner } from "../../design-system/components/Spinner/Spinner";
 import {
   CheckboxCircleIcon,
   CloseCircleIcon,
+  MoreIcon,
   PinIcon,
+  PlayIcon,
+  PowerIcon,
   ProhibitedIcon,
   WarningIcon,
 } from "../../design-system/icons";
-import { MoreIcon } from "../../design-system/icons/MoreIcon";
-import { PlayIcon } from "../../design-system/icons/PlayIcon";
-import { PowerIcon } from "../../design-system/icons/PowerIcon";
 
 import "./workflow-node.css";
-
-import { ButtonGroup } from "../../design-system/components/ButtonGroup";
 
 type NodeStatus =
   | "default"
